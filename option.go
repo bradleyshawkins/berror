@@ -1,4 +1,4 @@
-package error
+package berror
 
 const (
 	UnauthenticatedMsg         = "user is not authenticated"
