@@ -71,3 +71,11 @@ func (e *Error) HttpStatusCode() int {
 	}
 	return code
 }
+
+func NewInternal(msg string) *Error {
+	return New(msg, WithInternal())
+}
+
+func WrapInternal(err error, msg string) *Error {
+	return Wrap(err, WithMessage(msg), WithInternal())
+}
