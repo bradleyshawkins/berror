@@ -1,8 +1,11 @@
 package berror
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
+	"log"
 	"net/http"
 )
 
@@ -70,6 +73,13 @@ func (e *Error) HttpStatusCode() int {
 		return http.StatusInternalServerError
 	}
 	return code
+}
+
+func (e *Error) WriteAsJson(w io.Writer) {
+	err := json.NewEncoder(w).Encode(e)
+	if err != nil {
+		log.Println("unable to write json response. Error:", err)
+	}
 }
 
 func NewInternal(msg string) *Error {
