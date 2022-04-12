@@ -1,7 +1,7 @@
 package berror
 
 const (
-	UnauthenticatedMsg         = "user is not authenticated"
+	UnauthenticatedMsg         = "User is not authenticated"
 	InvalidFieldMsg            = "Invalid field was provided"
 	InternalMsg                = "Unexpected internal error occurred"
 	DuplicateMsg               = "Entity already exists"
@@ -9,6 +9,7 @@ const (
 	NotExistsMsg               = "Entity does not exist"
 	RequiredEntityNotExistsMsg = "A required entity has not been created"
 	DisabledMsg                = "Entity has been disabled"
+	AuthenticationFailedMsg    = "Authentication failed"
 )
 
 type Option func(e *Error)
@@ -73,5 +74,12 @@ func WithEntityDisabled() Option {
 	return func(e *Error) {
 		e.code = CodeDisabled
 		e.userMessage = DisabledMsg
+	}
+}
+
+func WithAuthenticationFailed() Option {
+	return func(e *Error) {
+		e.code = CodeAuthenticationFailed
+		e.userMessage = AuthenticationFailedMsg
 	}
 }

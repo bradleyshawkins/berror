@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
-	"log"
 	"net/http"
 )
 
@@ -75,10 +73,10 @@ func (e *Error) HttpStatusCode() int {
 	return code
 }
 
-func (e *Error) WriteAsJson(w io.Writer) {
+func (e *Error) WriteAsJson(w http.ResponseWriter) {
 	err := json.NewEncoder(w).Encode(e)
 	if err != nil {
-		log.Println("unable to write json response. Error:", err)
+		http.Error(w, "unable to write json response", http.StatusInternalServerError)
 	}
 }
 

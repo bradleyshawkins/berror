@@ -14,6 +14,7 @@ const (
 	CodeNotExists
 	CodeRequiredEntityNotExists
 	CodeDisabled
+	CodeAuthenticationFailed
 )
 
 var codeHttpStatusCodeMap = map[Code]int{
@@ -26,4 +27,5 @@ var codeHttpStatusCodeMap = map[Code]int{
 	CodeNotExists:               http.StatusNotFound,
 	CodeRequiredEntityNotExists: http.StatusConflict,
 	CodeDisabled:                http.StatusNotFound,
+	CodeAuthenticationFailed:    http.StatusUnauthorized,
 }
